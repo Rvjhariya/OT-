@@ -1,0 +1,10 @@
+- id: modbus_external_write
+description: External source performing Modbus write
+severity: high
+when:
+proto: modbus
+op_in: ["fc_5","fc_6","fc_15","fc_16"]
+src_not_private: true
+respond:
+- type: alert
+title: "External Modbus write detected"

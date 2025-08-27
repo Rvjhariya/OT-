@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+api:
+build: .
+ports:
+- "8000:8000"
+volumes:
+- ./src:/app/src
+- ./rules:/app/rules
+sensor:
+image: python:3.11-slim
+volumes:
+- ./src:/app/src
+- /var/run/docker.sock:/var/run/docker.sock:ro
+working_dir: /app
+command: ["python", "src/sensor_modbus.py"]
+cap_add:
+- NET_RAW
+- NET_ADMIN
+network_mode: "host"
